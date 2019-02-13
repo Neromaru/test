@@ -39,12 +39,17 @@ async def move_up(request):
         return web.HTTPFound('/')
     return render_templ(request, False)
 
+@routes.get('/none')
+async def re_render(request):
+    return render_templ(request, False)
 
 @routes.get('/{path}')
 async def handle(request):
     cur_dir = os.getcwd()
     path = request.match_info.get('path', base_path)
     selected = cur_dir+f'\\{path}'
+    if path not in os.listdir('.'):
+        return web.HTTPFound('/none')
     if os.path.isdir(selected):
         os.chdir(selected)
         return render_templ(request, False)
