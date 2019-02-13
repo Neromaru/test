@@ -1,0 +1,11 @@
+<body>
+    <ul>
+    {% if root == false %}
+        <li><a href="/">./</a></li>
+        <li><a href="/up">../</a></li>
+    {% endif %}
+    {% for li in folder %}
+        <li><a href="/{{ li }}">{{ li }}</a></li>
+    {% endfor %}
+    </ul>
+</body>
